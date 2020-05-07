@@ -1,12 +1,14 @@
+require_relative "../../../run_data"
+
 module Inspec::Plugin::V2::PluginType
   class Reporter < Inspec::Plugin::V2::PluginBase
     register_plugin_type(:reporter)
 
-    attr_reader :run_data
+    attr_reader :run_data, :cooked_run_data
 
     def initialize(config)
       @config = config
-      @run_data = config[:run_data]
+      @run_data = Inspec::RunData.new(config[:run_data])
       @output = ""
     end
 
